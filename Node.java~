@@ -1,0 +1,9 @@
+//Node Class
+ public class Node{
+
+  private String data;
+  private Node left;
+  private Node right;
+
+
+}

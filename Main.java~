@@ -1,0 +1,9 @@
+public class Main(){
+  
+  public static void(String args[]){
+    
+   Node newNode = new Node("Hello World");
+   newNode.printNode();
+  }
+  
+}
