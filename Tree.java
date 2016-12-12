@@ -1,66 +1,169 @@
-public class Tree{
-  
+public class Tree {
+
  Node root;
- 
-  public boolean add(String data){
-   if (root == null) {
-    root = new Node(data);
-    return true;
-   } 
-   else {
-     return root.insert(data);
+
+ public void addNode(int key, String name) {
+
+  // Create a new Node and initialize it
+
+  Node newNode = new Node(key, name);
+
+  // If there is no root this becomes root
+
+  if (root == null) {
+
+   root = newNode;
+
+  } else {
+
+   // Set root as the Node we will start
+   // with as we traverse the tree
+
+   Node focusNode = root;
+
+   // Future parent for our new Node
+
+   Node parent;
+
+   while (true) {
+
+    // root is the top parent so we start
+    // there
+
+    parent = focusNode;
+
+    // Check if the new node should go on
+    // the left side of the parent node
+
+    if (key < focusNode.key) {
+
+     // Switch focus to the left child
+
+     focusNode = focusNode.leftChild;
+
+     // If the left child has no children
+
+     if (focusNode == null) {
+
+      // then place the new node on the left of it
+
+      parent.leftChild = newNode;
+      return; // All Done
+
+     }
+
+    } else { // If we get here put the node on the right
+
+     focusNode = focusNode.rightChild;
+
+     // If the right child has no children
+
+     if (focusNode == null) {
+
+      // then place the new node on the right of it
+
+      parent.rightChild = newNode;
+      return; // All Done
+
+     }
+
+    }
+
    }
   }
-  
-  public void inOrder(){
-    if(root != null){
-     root.inOrder(); 
-    }   
+
+ }
+
+ // All nodes are visited in ascending order
+ // Recursion is used to go to one node and
+ // then go to its child nodes and so forth
+
+ public void inOrderTraverseTree(Node focusNode) {
+
+  if (focusNode != null) {
+
+   // Traverse the left node
+
+   inOrderTraverseTree(focusNode.leftChild);
+
+   // Visit the currently focused on node
+
+   System.out.println(focusNode);
+
+   // Traverse the right node
+
+   inOrderTraverseTree(focusNode.rightChild);
+
   }
-  
-  private class Node {
-    private Node left;
-    private Node right;
-    private String data;
-    
-    private Node(String myData) {
-      data = myData;
-    }
-    
-    private boolean insert (String myData){
-      boolean added = false;
-      if (this == null){
-        this.data = myData;
-        return true;
-      }
-      else if (myData > this.data){
-        if (this.right == null){
-          this.right = new Node(val);
-          return true;
-        }
-        else
-          added = this.right.insert(data);
-      }
-      else {
-        if (myData < this.data){
-          if(this.left == null){
-            this.left = new Node(val);
-            return true;
-          }
-          else
-            added = this.left.insert(val);
-      }
-    }
+
+ }
+
+
+
+ public Node findNode(int key) {
+
+  // Start at the top of the tree
+
+  Node focusNode = root;
+
+  // While we haven't found the Node
+  // keep looking
+
+  while (focusNode.key != key) {
+
+   // If we should search to the left
+
+   if (key < focusNode.key) {
+
+    // Shift the focus Node to the left child
+
+    focusNode = focusNode.leftChild;
+
+   } else {
+
+    // Shift the focus Node to the right child
+
+    focusNode = focusNode.rightChild;
+
+   }
+
+   // The node wasn't found
+
+   if (focusNode == null)
+    return null;
+
   }
-  
-    private void inOrder(){
-      if (!this = null){
-        if(this.left != null)
-          this.left.inOrder();
-        System.out.println(this.data);
-        if(this.right != null)
-          this.right.inOrder();
-      }
-    }
-  }  
+
+  return focusNode;
+
+ }
+
+}
+
+class Node {
+
+ int key;
+ String name;
+
+ Node leftChild;
+ Node rightChild;
+
+ Node(int key, String name) {
+
+  this.key = key;
+  this.name = name;
+
+ }
+
+ public String toString() {
+
+  return name + " has the key " + key;
+
+  /*
+   * return name + " has the key " + key + "\nLeft Child: " + leftChild +
+   * "\nRight Child: " + rightChild + "\n";
+   */
+
+ } 
+
 }

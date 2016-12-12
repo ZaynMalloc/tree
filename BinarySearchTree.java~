@@ -1,0 +1,93 @@
+public class BinarySearchTree {
+  
+ class Node {
+
+ Node left;
+ Node right;
+ 
+ int value;
+ String name;
+
+ Node(int value, String name) {
+
+  this.value = value;
+  this.name = name;
+
+ }
+
+ public String toString() {
+
+  return name + " has the key " + key;
+
+  /*
+   * return name + " has the key " + key + "\nLeft Child: " + leftChild +
+   * "\nRight Child: " + rightChild + "\n";
+   */
+
+ } 
+
+}
+ 
+ public void add(int value, String name){
+   
+   Node newNode = new Node(value, name);
+   
+   if(root == null){
+     
+     root = newNode;
+     
+   }
+   else if{
+         
+   Node myNode = root;
+
+   Node parent;
+
+   while (true) {
+
+    parent = myNode;
+
+    if (key < myNode.key) {
+
+   
+     myNode = myNode.leftChild;
+
+     if (myNode == null) {
+
+      parent.leftChild = newNode;
+      return; 
+
+     }
+
+    } else { 
+
+     myNode = myNode.rightChild;
+
+
+     if (myNode == null) {
+
+      parent.rightChild = newNode;
+      return; 
+     }
+
+    }
+
+   }
+     
+   }
+   
+   
+ }
+ 
+ public void inOrder(Node myNode){
+   
+   if (focusNode != null){
+     
+    inOrder(myNode.left);
+    System.out.println(myNode);
+    inOrder(myNode.right);
+     
+   }
+ }
+  
+}

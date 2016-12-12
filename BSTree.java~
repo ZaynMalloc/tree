@@ -1,0 +1,98 @@
+public class BSTree {
+  
+ Node root;
+  
+ class Node {
+
+ Node left;
+ Node right;
+ 
+ int value;
+ String name;
+
+ Node(int value, String name) {
+  this.value = value;
+  this.name = name;
+ }
+
+}
+ 
+ public void search(int value){
+   
+  Node myNode = root;
+  
+  if(myNode == null){
+    System.out.println("There is no tree"); 
+  }
+  else if(myNode.value == value){
+   System.out.println(value); 
+  }
+  else if(value < myNode.value){
+    
+   myNode = myNode.left; 
+   search(myNode.value);
+  }
+  else if(value > myNode.value){
+    
+   myNode = myNode.right; 
+   search(myNode.value);
+  }
+ }
+  
+ public void add(int value, String name){
+   
+   Node newNode = new Node(value, name);
+   
+   if(root == null){  
+     root = newNode;    
+   }
+   else{        
+   Node myNode = root;
+   Node parent;
+
+   while (true) {
+     
+    parent = myNode;
+    
+    if (value < myNode.value) {  
+      
+     myNode = myNode.left;
+     
+     if (myNode == null) {
+       
+      parent.left = newNode;
+      return; 
+      
+     }
+    }else {
+      
+     myNode = myNode.right;
+     
+     if (myNode == null) {
+       
+      parent.right = newNode;
+      return;
+      
+     }
+
+    }
+
+   }
+     
+   }
+   
+   
+ }
+ 
+ public void inOrder(Node myNode){
+   
+   if (myNode != null){
+     
+    inOrder(myNode.left);
+    System.out.println(myNode.name);
+    inOrder(myNode.right);
+     
+   }
+ }
+  
+}
